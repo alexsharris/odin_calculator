@@ -1,0 +1,130 @@
+body {
+    background-color: rgb(158, 215, 223);
+    height: 100dvh;
+    margin: 0;;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'wght' 700;
+}
+
+.header {
+    height: 50px;
+    padding: 20px 0 0 20px;
+}
+
+.footer {
+    height: 70px;
+    padding: 20px 20px 0 20px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0; 
+    width: 100%;
+    background-color: #f0f0f0; 
+    z-index: 100;
+    box-sizing: border-box;
+}
+
+
+p {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 20px;
+    color: black;
+    margin: 0;
+}
+
+p.previous {
+    color: rgb(142, 170, 178);
+}
+
+.container {
+    height: calc(100dvh - 200px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#input {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 90px;
+    margin: 0;
+}
+
+.frame {
+    background-color: rgb(209, 245, 252);
+    border: 6px solid black;
+    min-width: 390px;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0px 20px 0px rgba(0, 0, 0, 1);
+}
+
+.nav {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    height: 100px;
+}
+
+.display {
+    width: 100%;
+    border-radius: 30px;
+}
+
+.keyboard {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.history {
+    background-color: black;
+    border-radius: 30px;
+    width: 200px;
+    height: 458px;
+    margin: auto 0 auto 0;
+}
+
+button {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 35px;
+    width: 65px;
+    height: 65px;
+    margin: 5px 5px 10px 5px;
+    border-radius: 100%;
+    border: 3px solid black;
+    box-shadow: 0px 5px 0px rgba(0, 0, 0, 1);
+    cursor: pointer;
+}
+
+button.moved {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+button.mediumBlue {
+    background-color: rgb(117, 196, 216);
+}
+
+button.lightBlue {
+    background-color: rgb(214, 236, 245);
+}
+
+
+button.small {
+    background-color: rgb(214, 236, 245);
+    width: 40px;
+    height: 40px;
+}
+
+button.orange {
+    background-color: rgb(235, 159, 109);
+}
+
+button:hover{
+    filter: brightness(0.85) saturate(1.5);
+}
