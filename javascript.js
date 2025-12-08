@@ -1,3 +1,11 @@
+// Operate Function
+
+let operate = function() {
+    let input = document.getElementById("input");
+    // Check for 
+    operands = input.split()
+}
+
 // Event Delegation for keys
 
 let input = document.getElementById("input");
@@ -24,7 +32,7 @@ keyboard.addEventListener('click', (event) => {
     switch(btn.id) {
         case "two":
             if (input.textContent === "0") {
-                input.textContent = "2";         
+                input.textContent = "2";
             }
             else if (inputLength >= 10) {
                 break;
@@ -174,6 +182,10 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent += "+";
             }
+            //Check if last character is not a number
+            else if (input.textContent.slice(-1) === ".") {
+                break;
+            }
             else if (inputLength >= 10) {
                 break;
             }
@@ -193,6 +205,10 @@ keyboard.addEventListener('click', (event) => {
         case "minus":
             if (input.textContent === "0") {
                 input.textContent += "-";
+            }
+            //Check if last character is not a number
+            else if (input.textContent.slice(-1) === ".") {
+                break;
             }
             else if (inputLength >= 10) {
                 break;
@@ -214,6 +230,10 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent+= '×';
             }
+            //Check if last character is not a number
+            else if (input.textContent.slice(-1) === ".") {
+                break;
+            }
             else if (inputLength >= 10) {
                 break;
             }
@@ -233,6 +253,10 @@ keyboard.addEventListener('click', (event) => {
         case "divide":
             if (input.textContent === "0") {
                 input.textContent += "÷";
+            }
+            //Check if last character is not a number
+            else if (input.textContent.slice(-1) === ".") {
+                break;
             }
             else if (inputLength >= 10) {
                 break;
@@ -254,6 +278,10 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent += "%";
             }
+            //Check if last character is not a number
+            else if (input.textContent.slice(-1) === ".") {
+                break;
+            }
             else if (inputLength >= 10) {
                 break;
             }
@@ -274,12 +302,24 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 break;
             }
-            else if (input.textContent[0] === "-") {
+            // Add sign to first operand if no other operands exist
+            else if (input.textContent[0] !== "-"
+                && !input.textContent.includes('-')
+                && !input.textContent.includes('+')
+                && !input.textContent.includes('×')
+                && !input.textContent.includes('÷')
+                && !input.textContent.includes('%'))  {
+                input.textContent = "-" + input.textContent;
+            }
+            // Remove sign from first operand if no other operands exist
+            else if (input.textContent[0] === "-"
+                && !input.textContent.includes('+')
+                && !input.textContent.includes('×')
+                && !input.textContent.includes('÷')
+                && !input.textContent.includes('%'))  {
                 input.textContent = input.textContent.slice(1);
             }
-            else {
-                input.textContent = "-" + input.textContent ;
-            }
+            // Change most recently inputted operand
             break;
     }
 })

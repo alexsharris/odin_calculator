@@ -102,11 +102,6 @@ button {
     cursor: pointer;
 }
 
-button.pressed {
-  /*transform: translateY(3px);*/
-  
-}
-
 button.mediumBlue {
     background-color: rgb(117, 196, 216);
 }
