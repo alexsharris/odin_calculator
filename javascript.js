@@ -1,9 +1,23 @@
+// Global variables
+const displayLimit = 11;
+
 // Operate Function
 
 let operate = function() {
     let input = document.getElementById("input");
     // Check for 
     operands = input.split()
+}
+
+// count instances of "."
+let countInstances = function(string, char) {
+    let count = 0;
+    for (let i = 0; i < string.length; i++) {
+        if (string[i] === char) {
+            count++;
+        }
+    }
+    return count;
 }
 
 // Event Delegation for keys
@@ -21,7 +35,7 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent = "1";
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else {
@@ -34,7 +48,7 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent = "2";
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else {
@@ -47,7 +61,7 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent = "3";
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else {
@@ -60,7 +74,7 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent = "4";
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else {
@@ -73,7 +87,7 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent = "5";
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else {
@@ -86,7 +100,7 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent = "6";
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else {
@@ -99,7 +113,7 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent = "7";
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else {
@@ -112,7 +126,7 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent = "8";
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else {
@@ -125,7 +139,7 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent = "9";
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else {
@@ -138,7 +152,7 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 break;
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else {
@@ -166,15 +180,42 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent += "."
             }
-            else if (inputLength >= 10) {
+            // Check if over limit
+            else if (inputLength >= displayLimit) {
                 break;
             }
-            else if (input.textContent.includes('.')) {
-                break;
+            // If last character is number AND there is an operator after first decimal
+            else if (Number.isInteger(Number(input.textContent.slice(-1)))) {
+
+                console.log(Number(input.textContent.slice(-1)));
+                console.log(Number.isInteger(Number(input.textContent.slice(-1))));
+                console.log(countInstances(input.textContent, "."));
+                console.log(input.textContent);
+
+                if (!input.textContent.includes('.')) {
+                    input.textContent += ".";
+                }
+                else if (input.textContent.slice(1).includes('+') && countInstances(input.textContent, ".") === 1) {
+                    console.log(input.textContent.slice(1))
+                    input.textContent += ".";
+                }
+                else if (input.textContent.slice(1).includes('-')) {
+                    input.textContent += ".";
+                }
+                else if (input.textContent.slice(1).includes('%')) {
+                    input.textContent += ".";
+                }
+                else if (input.textContent.slice(1).includes('×')) {
+                    input.textContent += ".";
+                }
+                else if (input.textContent.slice(1).includes('÷')) {
+                    input.textContent += ".";
+                }
             }
             else {
-                input.textContent += ".";
+                break;
             }
+            
             break;
     }
     switch(btn.id) {
@@ -186,7 +227,7 @@ keyboard.addEventListener('click', (event) => {
             else if (input.textContent.slice(-1) === ".") {
                 break;
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else if (input.textContent.includes('-')
@@ -210,7 +251,7 @@ keyboard.addEventListener('click', (event) => {
             else if (input.textContent.slice(-1) === ".") {
                 break;
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else if (input.textContent.includes('-')
@@ -234,7 +275,7 @@ keyboard.addEventListener('click', (event) => {
             else if (input.textContent.slice(-1) === ".") {
                 break;
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else if (input.textContent.includes('-')
@@ -258,7 +299,7 @@ keyboard.addEventListener('click', (event) => {
             else if (input.textContent.slice(-1) === ".") {
                 break;
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else if (input.textContent.includes('-')
@@ -282,7 +323,7 @@ keyboard.addEventListener('click', (event) => {
             else if (input.textContent.slice(-1) === ".") {
                 break;
             }
-            else if (inputLength >= 10) {
+            else if (inputLength >= displayLimit) {
                 break;
             }
             else if (input.textContent.includes('-')
