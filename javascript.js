@@ -1,15 +1,15 @@
 // Global variables
 const displayLimit = 11;
+const operations = ['+','-','%','×','÷'];
 
 // Operate Function
-
 let operate = function() {
     let input = document.getElementById("input");
     // Check for 
     operands = input.split()
 }
 
-// count instances of "."
+// count instances
 let countInstances = function(string, char) {
     let count = 0;
     for (let i = 0; i < string.length; i++) {
@@ -18,6 +18,17 @@ let countInstances = function(string, char) {
         }
     }
     return count;
+}
+
+// Get operator type
+let operatorType = function(string) {
+    let shortend = string.slice(1);
+    for (i=0; i < shortend.length; i++) {
+        if (operations.includes(shortend[i])){
+            return shortend[i];
+        }
+        else continue;
+    }
 }
 
 // Event Delegation for keys
@@ -177,46 +188,33 @@ keyboard.addEventListener('click', (event) => {
     }
     switch(btn.id) {
         case "decimal":
+            // If only 0 in input field
             if (input.textContent === "0") {
                 input.textContent += "."
             }
-            // Check if over limit
+            // Cancel if input over display limit
             else if (inputLength >= displayLimit) {
                 break;
             }
-            // If last character is number AND there is an operator after first decimal
-            else if (Number.isInteger(Number(input.textContent.slice(-1)))) {
-
-                console.log(Number(input.textContent.slice(-1)));
-                console.log(Number.isInteger(Number(input.textContent.slice(-1))));
-                console.log(countInstances(input.textContent, "."));
-                console.log(input.textContent);
-
-                if (!input.textContent.includes('.')) {
-                    input.textContent += ".";
-                }
-                else if (input.textContent.slice(1).includes('+') && countInstances(input.textContent, ".") === 1) {
-                    console.log(input.textContent.slice(1))
-                    input.textContent += ".";
-                }
-                else if (input.textContent.slice(1).includes('-')) {
-                    input.textContent += ".";
-                }
-                else if (input.textContent.slice(1).includes('%')) {
-                    input.textContent += ".";
-                }
-                else if (input.textContent.slice(1).includes('×')) {
-                    input.textContent += ".";
-                }
-                else if (input.textContent.slice(1).includes('÷')) {
-                    input.textContent += ".";
-                }
+            // Handle left side of equation (if no operator found)
+            else if (!input.textContent.slice(1).includes('-') 
+                && !input.textContent.slice(1).includes('+')
+                && !input.textContent.slice(1).includes('%')
+                && !input.textContent.slice(1).includes('×')
+                && !input.textContent.slice(1).includes('÷')) {
+                    if (Number.isInteger(Number(input.textContent.slice(-1))) && countInstances(input.textContent, ".") === 0) {
+                        input.textContent += ".";
+                    }
             }
+            // Isolate right side (if operator found)
             else {
-                break;
+                let type = operatorType(input.textContent);
+                let equationArray = input.textContent.split(type);
+                if (Number.isInteger(Number(input.textContent.slice(-1))) && countInstances(equationArray[1], ".") === 0) {
+                    input.textContent += ".";
+                }
             }
-            
-            break;
+        break;
     }
     switch(btn.id) {
         case "add":
@@ -340,6 +338,7 @@ keyboard.addEventListener('click', (event) => {
     }
     switch(btn.id) {
         case "changeSign":
+            // Ignore if input is just 0
             if (input.textContent === "0") {
                 break;
             }
