@@ -59,19 +59,20 @@ let operate = function() {
     let operandOne = Number(operands[0]);
     let operandTwo = Number(operands[1]);
     let result = ops[type](operandOne, operandTwo);
-    let resultString = String(operandOne) + " " + type + " " + String(operandTwo);
-
-    let finalResult = result;
-    if (result.length >= displayLimit) {
-        finalResult = result.slice(0, 9)
+    let operatedString = String(operandOne) + " " + type + " " + String(operandTwo);
+    
+    // Convert to string and trim if necessary
+    let resultString = result.toString()
+    if (resultString.length >= displayLimit) {
+        resultString = resultString.slice(0, 9)
     }
     
     // Update input field with result 
-    input.textContent = finalResult;
-    console.log(finalResult);
+    input.textContent = resultString;
+    console.log(resultString);
 
     // Add equation to the #previous field
-    previous.textContent = resultString;
+    previous.textContent = operatedString;
 }
 
 // Event Delegation for keys
