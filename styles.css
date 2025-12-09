@@ -96,6 +96,7 @@ p.previous {
 }
 
 button {
+    color: black;
     font-family: "Bebas Neue", sans-serif;
     font-size: 35px;
     width: 65px;
