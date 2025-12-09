@@ -38,6 +38,7 @@ p {
 
 p.previous {
     color: rgb(142, 170, 178);
+    font-size: 25px;
 }
 
 .container {
@@ -57,7 +58,7 @@ p.previous {
 .frame {
     background-color: rgb(209, 245, 252);
     border: 6px solid black;
-    min-width: 370px;
+    min-width: 380px;
     max-width: 380px;
     padding: 20px;
     border-radius: 50px;
@@ -73,7 +74,11 @@ p.previous {
 
 .display {
     width: 100%;
-    border-radius: 30px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
     overflow: hidden;
 }
 

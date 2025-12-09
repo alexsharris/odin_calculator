@@ -1,13 +1,21 @@
 // Global variables
 const displayLimit = 11;
+
 const operations = ['+','-','%','×','÷'];
 
-// Operate Function
-let operate = function() {
-    let input = document.getElementById("input");
-    // Check for 
-    operands = input.split()
-}
+let input = document.getElementById("input");
+
+let keyboard = document.querySelector(".keyboard");
+
+let previous = document.querySelector(".previous");
+
+const ops = {
+  '+': (a, b) => a + b,
+  '-': (a, b) => a - b,
+  '×': (a, b) => a * b,
+  '÷': (a, b) => a / b,
+  '%': (a, b) => a % b,
+};
 
 // count instances
 let countInstances = function(string, char) {
@@ -31,10 +39,37 @@ let operatorType = function(string) {
     }
 }
 
-// Event Delegation for keys
+// Operate Function
+let operate = function() {
 
-let input = document.getElementById("input");
-let keyboard = document.querySelector(".keyboard");
+    if (input.textContent[0] === "-") {
+        // split on second operator
+        let shortend = input.textContent.slice(1);
+        var type = operatorType(input.textContent);
+        var operands = shortend.split(type, 2);
+        // Prepend back in the minus sign to first operand
+        operands[0] =  "-" + operands[0];
+    }
+    else {
+        // split on first operator
+        var type = operatorType(input.textContent);
+        var operands = input.textContent.split(type, 2)
+        }
+    // Convert operands to numbers and calculate result
+    let operandOne = Number(operands[0]);
+    let operandTwo = Number(operands[1]);
+    let result = ops[type](operandOne, operandTwo);
+    let resultString = String(operandOne) + " " + type + " " + String(operandTwo);
+    
+    // Update input field with result 
+    input.textContent = result;
+    console.log(result);
+
+    // Add equation to the #previous field
+    previous.textContent = resultString;
+}
+
+// Event Delegation for keys
 
 keyboard.addEventListener('click', (event) => {
     const btn = event.target.closest('button');
@@ -178,6 +213,8 @@ keyboard.addEventListener('click', (event) => {
     }
     switch(btn.id) {
         case "delete":
+            // Clear previous field
+            previous.textContent = "";
             if (inputLength === 1) {
                 input.textContent = "0";
             }
@@ -221,12 +258,15 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 input.textContent += "+";
             }
-            //Check if last character is not a number
+            //Check if last character is decimal point
             else if (input.textContent.slice(-1) === ".") {
                 break;
             }
             else if (inputLength >= displayLimit) {
                 break;
+            }
+            else if (input.textContent[0] === "-" && countInstances(input.textContent, "+") + countInstances(input.textContent, "-") < 2) {
+                input.textContent += "+";
             }
             else if (input.textContent.includes('-')
                 || input.textContent.includes('+')
@@ -251,6 +291,9 @@ keyboard.addEventListener('click', (event) => {
             }
             else if (inputLength >= displayLimit) {
                 break;
+            }
+            else if (input.textContent[0] === "-" && countInstances(input.textContent, "-") < 2) {
+                input.textContent += "-";
             }
             else if (input.textContent.includes('-')
                 || input.textContent.includes('+')
@@ -342,25 +385,18 @@ keyboard.addEventListener('click', (event) => {
             if (input.textContent === "0") {
                 break;
             }
-            // Add sign to first operand if no other operands exist
-            else if (input.textContent[0] !== "-"
-                && !input.textContent.includes('-')
-                && !input.textContent.includes('+')
-                && !input.textContent.includes('×')
-                && !input.textContent.includes('÷')
-                && !input.textContent.includes('%'))  {
+            // Add sign to first operand
+            else if (input.textContent[0] !== "-")  {
                 input.textContent = "-" + input.textContent;
             }
-            // Remove sign from first operand if no other operands exist
-            else if (input.textContent[0] === "-"
-                && !input.textContent.includes('+')
-                && !input.textContent.includes('×')
-                && !input.textContent.includes('÷')
-                && !input.textContent.includes('%'))  {
+            // Remove sign from first operand
+            else if (input.textContent[0] === "-")  {
                 input.textContent = input.textContent.slice(1);
             }
-            // Change most recently inputted operand
-            break;
+        break;
+    }
+    switch(btn.id) {
+        case "equals":
+            operate();
     }
 })
-
