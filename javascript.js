@@ -208,6 +208,8 @@ keyboard.addEventListener('click', (event) => {
     }
     switch(btn.id) {
         case "clear":
+            // Clear previous and input field
+            previous.textContent = "";
             input.textContent = "0";
             break;
     }
@@ -215,6 +217,7 @@ keyboard.addEventListener('click', (event) => {
         case "delete":
             // Clear previous field
             previous.textContent = "";
+
             if (inputLength === 1) {
                 input.textContent = "0";
             }
