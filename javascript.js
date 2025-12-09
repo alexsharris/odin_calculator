@@ -60,10 +60,15 @@ let operate = function() {
     let operandTwo = Number(operands[1]);
     let result = ops[type](operandOne, operandTwo);
     let resultString = String(operandOne) + " " + type + " " + String(operandTwo);
+
+    let finalResult = result;
+    if (result.length >= displayLimit) {
+        finalResult = result.slice(0, 9)
+    }
     
     // Update input field with result 
-    input.textContent = result;
-    console.log(result);
+    input.textContent = finalResult;
+    console.log(finalResult);
 
     // Add equation to the #previous field
     previous.textContent = resultString;
